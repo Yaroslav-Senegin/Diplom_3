@@ -25,3 +25,10 @@ class UserAccountPage(BasePage):
     @allure.step('Getting the order number in "Order History"')
     def get_order_number(self):
         return self.get_text_of_element(UserAccountLocators.ORDER_NUMBER)
+    
+    @allure.step('Authorization')
+    def login_user(self, user_data):
+        self.set_text_to_element(UserAccountLocators.INPUT_EMAIL, user_data['email'])
+        self.set_text_to_element(UserAccountLocators.INPUT_PASSWORD, user_data['password'])
+        self.click_to_visible_element(UserAccountLocators.ENTER_BTN)
+

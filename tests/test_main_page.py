@@ -28,11 +28,11 @@ class TestMainPage:
         assert end_quantity > start_quantity
 
     @allure.title('Checking order creation')
-    def test_make_order(self, driver, login):
+    def test_make_order(self, driver, login_user):
         mp = MainPage(driver)
         mp.find_element(MainPageLocators.INGREDIENT_BUN)
         mp.add_bun_to_order_basket()
         mp.add_sauce_to_order_basket()
         mp.click_order_btn()
         mp.find_element(MainPageLocators.ORDER_NUMBER)
-        assert mp.check_element(MainPageLocators.ORDER_STATUS_TEXT).is_displayed() == True
+        assert mp.check_element(MainPageLocators.ORDER_STATUS_TEXT).is_displayed()

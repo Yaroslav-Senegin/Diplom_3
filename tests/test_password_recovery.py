@@ -16,18 +16,18 @@ class TestPasswordRecover:
         assert prp.find_element(PasswordRecoverLocators.SAVE_BTN).is_displayed()
 
     @allure.title('Checking the transition to the Restore button after entering email')
-    def test_enter_email_and_click_recover(self, driver, create_and_delete_user):
+    def test_enter_email_and_click_recover(self, driver, user_data):
         prp = PasswordRecoverPage(driver)
         prp.open_page(Urls.FORGOT_PASSWORD_PAGE)
-        prp.set_email_for_recover_password(create_and_delete_user[0]['email'])
+        prp.set_email_for_recover_password(user_data)
         prp.click_recover_btn()
         assert prp.find_element(PasswordRecoverLocators.SAVE_BTN).is_displayed()
 
     @allure.title('Checking the password field activity after clicking on the show/hide icon')
-    def test_active_password_field(self, driver, create_and_delete_user):
+    def test_active_password_field(self, driver, user_data):
         prp = PasswordRecoverPage(driver)
         prp.open_page(Urls.FORGOT_PASSWORD_PAGE)
-        prp.set_email_for_recover_password(create_and_delete_user[0]['email'])
+        prp.set_email_for_recover_password(user_data)
         prp.click_recover_btn()
         prp.find_element(PasswordRecoverLocators.SAVE_BTN)
         prp.click_on_show_password_icon()

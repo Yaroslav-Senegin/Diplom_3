@@ -16,7 +16,7 @@ class TestOrderListPage:
         assert OrdersPage(driver).check_element(OrdersPageLocators.ORDER_STRUCTURE_TITLE).is_displayed()
 
     @allure.title('Checking whether the created order is displayed in the Order list')
-    def test_new_order_in_orderlist(self, driver, login):
+    def test_new_order_in_orderlist(self, driver, login_user):
         main_page = MainPage(driver)
         header_page = HeaderPage(driver)
         account_page = UserAccountPage(driver)
@@ -32,7 +32,7 @@ class TestOrderListPage:
         assert wanted_order.is_displayed()
 
     @allure.title('Checking the "All Time Completed" counter changes after creating an order')
-    def test_change_counter_total_orders(self, driver, login):
+    def test_change_counter_total_orders(self, driver, login_user):
         main_page = MainPage(driver)
         header_page = HeaderPage(driver)
         orders_page = OrdersPage(driver)
@@ -49,7 +49,7 @@ class TestOrderListPage:
         assert int(new_total_number) == int(total_number) + 1
 
     @allure.title('Checking the "Completed for Today" counter changes after creating an order')
-    def test_change_counter_today_orders(self, driver, login):
+    def test_change_counter_today_orders(self, driver, login_user):
         main_page = MainPage(driver)
         header_page = HeaderPage(driver)
         order_page = OrdersPage(driver)
@@ -66,7 +66,7 @@ class TestOrderListPage:
         assert int(new_number) == int(today_number) + 1
 
     @allure.title('Checking whether a new order is displayed in the "In Progress" list')
-    def test_new_order_appears_in_work_list(self, driver, login):
+    def test_new_order_appears_in_work_list(self, driver, login_user):
         main_page = MainPage(driver)
         header_page = HeaderPage(driver)
         orders_page = OrdersPage(driver)
