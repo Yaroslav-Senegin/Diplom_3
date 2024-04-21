@@ -12,10 +12,14 @@ class BasePage:
     def find_element(self, locator):
         return WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located(locator))
 
+    @allure.step('Wait element to be clickable')
+    def wait_element_to_be_clickable(self, locator):
+        WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable(locator))
+        return self.driver.find_element(*locator)
+ 
     @allure.step('Click the element')
     def click_to_element(self, locator):
-        WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable(locator))
-        self.driver.find_element(*locator).click()
+        self.wait_element_to_be_clickable(locator).click()
 
     @allure.step('Getting the text of an element')
     def get_text_of_element(self, locator):
@@ -23,12 +27,11 @@ class BasePage:
 
     @allure.step('Insert text {text}')
     def set_text_to_element(self, locator, text):
-        WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable(locator))
-        self.driver.find_element(*locator).send_keys(text)
+        self.wait_element_to_be_clickable(locator).send_keys(text)
 
     @allure.step('Click a visible element')
     def click_to_visible_element(self, locator):
-        WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located(locator)).click()
+        self.driver.find_element(*locator).click()
 
     @allure.step('Checking whether an element is displayed on a page')
     def check_element(self, locator):
@@ -65,8 +68,8 @@ class BasePage:
 
     @allure.step('Drag and Drop an element')
     def drag_and_drop_element(self, locator_from, locator_to):
-        WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located(locator_from))
-        WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located(locator_to))
+        self.wait_visibility_element(locator_from)
+        self.wait_visibility_element(locator_to)
         element_from = self.driver.find_element(*locator_from)
         element_to = self.driver.find_element(*locator_to)
         self.driver.execute_script("""
