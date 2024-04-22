@@ -3,7 +3,6 @@ from data import Urls
 from pages.user_account_page import UserAccountPage
 from pages.header_page import HeaderPage
 from data import Text
-from locators.user_account_locators import UserAccountLocators
 
 
 class TestUserAccount:
