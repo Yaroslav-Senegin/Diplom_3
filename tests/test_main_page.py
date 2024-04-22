@@ -1,6 +1,6 @@
 import allure
-from locators.main_page_locators import MainPageLocators
 from pages.main_page import MainPage
+from data import Text
 
 
 class TestMainPage:
@@ -8,16 +8,16 @@ class TestMainPage:
     def test_open_ingredient_popup(self, driver):
         mp = MainPage(driver)
         mp.click_on_bun()
-        popup_text = mp.get_text_of_element(MainPageLocators.INGREDIENT_POPUP_TITLE)
-        assert popup_text == "Детали ингредиента"
+        popup_text = mp.check_popup_text()
+        assert popup_text == Text.POPUP_TEXT
 
     @allure.title('Checking the closing of the ingredient pop-up window by clicking the cross')
     def test_close_ingredient_details_popup(self, driver):
         mp = MainPage(driver)
         mp.click_on_bun()
         mp.click_close_btn()
-        mp.check_invisibility(MainPageLocators.INGREDIENT_POPUP)
-        assert mp.check_element(MainPageLocators.INGREDIENT_POPUP).is_displayed() == False
+        mp.check_invisibility_of_popup()
+        assert mp.check_invisibility_of_popup().is_displayed() == False
 
     @allure.title('Checking for ingredient counter changes')
     def test_change_ingredient_counter(self, driver):
@@ -30,9 +30,9 @@ class TestMainPage:
     @allure.title('Checking order creation')
     def test_make_order(self, driver, login_user):
         mp = MainPage(driver)
-        mp.find_element(MainPageLocators.INGREDIENT_BUN)
+        mp.find_ingredient_bun()
         mp.add_bun_to_order_basket()
         mp.add_sauce_to_order_basket()
         mp.click_order_btn()
-        mp.find_element(MainPageLocators.ORDER_NUMBER)
-        assert mp.check_element(MainPageLocators.ORDER_STATUS_TEXT).is_displayed()
+        mp.find_order_number()
+        assert mp.check_order_status().is_displayed()

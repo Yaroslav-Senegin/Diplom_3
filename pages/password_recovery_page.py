@@ -15,3 +15,11 @@ class PasswordRecoverPage(BasePage):
     @allure.step('Click the Show/Hide password icon')
     def click_on_show_password_icon(self):
         self.click_to_visible_element(PasswordRecoverLocators.SHOW_PASSWORD_ICON)
+
+    @allure.step('Find the save button')
+    def find_save_button(self):
+        return self.find_element(PasswordRecoverLocators.SAVE_BTN)
+    
+    @allure.step('Check that the input password field is active')
+    def check_input_password_field(self):
+        return self.find_element(PasswordRecoverLocators.INPUT_PASSWORD_ACTIVE)

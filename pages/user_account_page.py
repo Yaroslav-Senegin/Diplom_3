@@ -9,10 +9,22 @@ class UserAccountPage(BasePage):
     def click_password_recover_btn(self):
         self.click_to_visible_element(UserAccountLocators.RESET_PASSWORD_BTN)
 
+    @allure.step('Check visibility the profile button')
+    def wait_visibility_profile_button(self):
+        return self.wait_visibility_element(UserAccountLocators.PROFILE_BTN)    
+    
+    @allure.step('Check visibility the enter button')
+    def wait_visibility_enter_button(self):
+        self.wait_visibility_element(UserAccountLocators.ENTER_BTN)
+
+    @allure.step('Check text the enter button')
+    def get_text_enter_button(self):
+        return self.get_text_of_element(UserAccountLocators.ENTER_BTN)
+
     @allure.step('Click the Personal Account button')
     def click_account_btn(self):
         self.move_to_element_and_click(HeaderLocators.ACCOUNT_BTN)
-        self.wait_visibility_element(UserAccountLocators.PROFILE_BTN)
+        self.wait_visibility_profile_button()
 
     @allure.step('Click the "Exit" button')
     def click_logout_btn(self):
@@ -31,4 +43,8 @@ class UserAccountPage(BasePage):
         self.set_text_to_element(UserAccountLocators.INPUT_EMAIL, user_data['email'])
         self.set_text_to_element(UserAccountLocators.INPUT_PASSWORD, user_data['password'])
         self.click_to_visible_element(UserAccountLocators.ENTER_BTN)
+
+    @allure.step('Find the order status')
+    def find_order_status(self):
+        return self.find_element(UserAccountLocators.ORDER_STATUS)
 

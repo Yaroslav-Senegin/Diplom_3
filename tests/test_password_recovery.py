@@ -1,6 +1,5 @@
 import allure
 from data import Urls
-from locators.password_recovery_locators import PasswordRecoverLocators
 from pages.user_account_page import UserAccountPage
 from pages.password_recovery_page import PasswordRecoverPage
 from pages.header_page import HeaderPage
@@ -13,7 +12,7 @@ class TestPasswordRecover:
         HeaderPage(driver).click_user_account_btn()
         UserAccountPage(driver).click_password_recover_btn()
         prp.click_recover_btn()
-        assert prp.find_element(PasswordRecoverLocators.SAVE_BTN).is_displayed()
+        assert prp.find_save_button().is_displayed()
 
     @allure.title('Checking the transition to the Restore button after entering email')
     def test_enter_email_and_click_recover(self, driver, user_data):
@@ -21,7 +20,7 @@ class TestPasswordRecover:
         prp.open_page(Urls.FORGOT_PASSWORD_PAGE)
         prp.set_email_for_recover_password(user_data)
         prp.click_recover_btn()
-        assert prp.find_element(PasswordRecoverLocators.SAVE_BTN).is_displayed()
+        assert prp.find_save_button().is_displayed()
 
     @allure.title('Checking the password field activity after clicking on the show/hide icon')
     def test_active_password_field(self, driver, user_data):
@@ -29,6 +28,6 @@ class TestPasswordRecover:
         prp.open_page(Urls.FORGOT_PASSWORD_PAGE)
         prp.set_email_for_recover_password(user_data)
         prp.click_recover_btn()
-        prp.find_element(PasswordRecoverLocators.SAVE_BTN)
+        prp.find_save_button()
         prp.click_on_show_password_icon()
-        assert prp.find_element(PasswordRecoverLocators.INPUT_PASSWORD_ACTIVE)
+        assert prp.check_input_password_field()

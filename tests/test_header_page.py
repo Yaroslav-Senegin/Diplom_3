@@ -1,5 +1,4 @@
 import allure
-from locators.orders_page_locators import OrdersPageLocators
 from pages.header_page import HeaderPage
 from data import Urls
 
@@ -9,7 +8,6 @@ class TestHeaderPage:
     def test_redirect_to_constructor(self, driver):
         hp = HeaderPage(driver)
         hp.click_orders_list_btn()
-        hp.wait_visibility_element(OrdersPageLocators.ORDERS_LIST_TITLE)
         hp.click_constructor_btn()
         current_url = hp.get_current_url()
         assert current_url == Urls.MAIN_PAGE

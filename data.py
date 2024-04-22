@@ -8,3 +8,7 @@ class Urls:
     RESET_PASSWORD_PAGE = MAIN_PAGE + 'reset-password'
     ORDERS_HISTORY = MAIN_PAGE + 'account/order-history'
     FEED = MAIN_PAGE + 'feed'
+
+class Text:
+    POPUP_TEXT = "Детали ингредиента"
+    BUTTON_TEXT = "Войти"

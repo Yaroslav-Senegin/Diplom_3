@@ -44,11 +44,7 @@ class BasePage:
 
     @allure.step('Waiting for an element to be visible on the page')
     def wait_visibility_element(self, locator):
-        WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located(locator))
-
-    @allure.step('Waiting for an element to be invisible on the page')
-    def wait_invisibility_element(self, locator):
-        return WebDriverWait(self.driver, 15).until(EC.invisibility_of_element_located(locator))
+        self.find_element(locator)
 
     @allure.step('Get the current link')
     def get_current_url(self):
